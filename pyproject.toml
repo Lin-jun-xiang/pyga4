@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pyga4"
+version = "0.1.0"
+description = "Python Google Analytics 4 (GA4) Data Extraction and Analysis Toolkit"
+authors = ["Lin-jun-xiang <jimmy871117@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Lin-jun-xiang/pyGA4"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matplotlib = "3.6.2"
+pandas = "1.5.3"
+protobuf = "4.24.3"
+pycryptodome = "3.18.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
