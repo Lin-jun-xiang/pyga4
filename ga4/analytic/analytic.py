@@ -4,64 +4,77 @@ from typing import Any
 from ga4.model.bigquery import Ga4Table
 
 
-class User:
+class BaseAnalytic:
+    @staticmethod
+    def attribute_distribution(table: Ga4Table, attribute_name: str) -> Counter:
+        attribute_list = getattr(table, attribute_name)
+        counts = Counter(attribute_list)
+
+        return counts
+   
+
+class UserAnalytic(BaseAnalytic):
     """The features of user"""
-    @staticmethod
-    def countries_distribution(table: Ga4Table) -> list:
-        all_users_country = table.geo_country_list
-        counts = Counter(all_users_country)
-        
-        return counts
+
+    def __init__(self, table: Ga4Table) -> None:
+        self.table = table
+
+    @property
+    def countries_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'geo_country_list'
+        )
 
 
-class Device:
+class DeviceAnalytic(BaseAnalytic):
     """The features of technology"""
-    @staticmethod
-    def os_distribution(table: Ga4Table) -> list:
-        all_devices_os = table.device_operating_system_list
-        counts = Counter(all_devices_os)
-        
-        return counts
 
-    @staticmethod
-    def category_distribution(table: Ga4Table) -> list:
-        all_devices_category = table.device_category_list
-        counts = Counter(all_devices_category)
-        
-        return counts
+    def __init__(self, table: Ga4Table) -> None:
+        self.table = table
 
-    @staticmethod
-    def browser_distribution(table: Ga4Table) -> list:
-        all_devices_browser = table.device_web_info_browser_list
-        counts = Counter(all_devices_browser)
-        
-        return counts
+    @property
+    def os_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'device_operating_system_list'
+        )
 
-    @staticmethod
-    def mobile_brand_distribution(table: Ga4Table) -> list:
-        all_devices_mobile_brand = table.device_mobile_brand_name_list
-        counts = Counter(all_devices_mobile_brand)
-        
-        return counts
+    @property
+    def category_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'device_category_list'
+        )
 
-    @staticmethod
-    def mobile_model_distribution(table: Ga4Table) -> list:
-        all_devices_mobile_model = table.device_mobile_model_name_list
-        counts = Counter(all_devices_mobile_model)
-        
-        return counts
+    @property
+    def browser_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'device_web_info_browser_list'
+        )
+
+    @property
+    def mobile_brand_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'device_mobile_brand_name_list'
+        )
+
+    @property
+    def mobile_model_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'device_mobile_model_name_list'
+        )
 
 
-class Event:
+class EventAnalytic(BaseAnalytic):
     """The features of event"""
 
-    @staticmethod
-    def pages_distribution(table: Ga4Table) -> list:
+    def __init__(self, table: Ga4Table) -> None:
+        self.table = table
+
+    @property
+    def pages_distribution(self) -> Counter:
         """Return most common pages for all users"""
-        all_pages_loc = table.page_location_list
-        counts = Counter(all_pages_loc)
-        
-        return counts
+        return self.attribute_distribution(
+            self.table, 'page_location_list'
+        )
 
     @staticmethod
     def track_user_loc():

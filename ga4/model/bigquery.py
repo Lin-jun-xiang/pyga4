@@ -90,7 +90,9 @@ class Ga4Table(BaseTable):
         self._query_job = self.client.query(query, job_config=self.query_config)
         results = self._query_job.result()
 
-        return [row.user_id for row in results]
+        field_name = query_target.split('.')[-1] if '.' in query_target else query_target
+
+        return [getattr(row, field_name) for row in results]
 
     @property
     @calculate_bytes_processed
@@ -212,7 +214,7 @@ class Ga4Table(BaseTable):
         self._query_job = self.client.query(query, job_config=self.query_config)
         results = self._query_job.result()
 
-        return [row.user_id for row in results]
+        return [row.page_location for row in results]
 
     @calculate_bytes_processed
     def query(self, query: str) -> list:
@@ -220,4 +222,4 @@ class Ga4Table(BaseTable):
         self._query_job = self.client.query(query, job_config=self.query_config)
         results = self._query_job.result()
 
-        return [row.user_id for row in results]
+        return results
