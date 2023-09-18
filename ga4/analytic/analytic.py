@@ -7,32 +7,61 @@ from ga4.model.bigquery import Ga4Table
 class User:
     """The features of user"""
     @staticmethod
-    def most_common_countries(table: Ga4Table, n: int = 3) -> list:
-        pass
+    def countries_distribution(table: Ga4Table) -> list:
+        all_users_country = table.geo_country_list
+        counts = Counter(all_users_country)
+        
+        return counts
 
 
-class Technology:
+class Device:
     """The features of technology"""
     @staticmethod
-    def most_common_os(table: Ga4Table, n: int = 3) -> list:
-        pass
+    def os_distribution(table: Ga4Table) -> list:
+        all_devices_os = table.device_operating_system_list
+        counts = Counter(all_devices_os)
+        
+        return counts
 
     @staticmethod
-    def most_common_browser(table: Ga4Table, n: int = 3) -> list:
-        pass
-
-
-class Page:
-    """The features of page"""
+    def category_distribution(table: Ga4Table) -> list:
+        all_devices_category = table.device_category_list
+        counts = Counter(all_devices_category)
+        
+        return counts
 
     @staticmethod
-    def most_common_pages(table: Ga4Table, n: int = 3) -> list:
+    def browser_distribution(table: Ga4Table) -> list:
+        all_devices_browser = table.device_web_info_browser_list
+        counts = Counter(all_devices_browser)
+        
+        return counts
+
+    @staticmethod
+    def mobile_brand_distribution(table: Ga4Table) -> list:
+        all_devices_mobile_brand = table.device_mobile_brand_name_list
+        counts = Counter(all_devices_mobile_brand)
+        
+        return counts
+
+    @staticmethod
+    def mobile_model_distribution(table: Ga4Table) -> list:
+        all_devices_mobile_model = table.device_mobile_model_name_list
+        counts = Counter(all_devices_mobile_model)
+        
+        return counts
+
+
+class Event:
+    """The features of event"""
+
+    @staticmethod
+    def pages_distribution(table: Ga4Table) -> list:
         """Return most common pages for all users"""
         all_pages_loc = table.page_location_list
         counts = Counter(all_pages_loc)
-        top_n = counts.most_common(n)
-
-        return top_n
+        
+        return counts
 
     @staticmethod
     def track_user_loc():
@@ -80,5 +109,5 @@ class Page:
 
         Note that the input lists should contain counts or frequencies of events.
 
-        """
+    """
         return len(target_events) / len(engagement_events) * 100.0
