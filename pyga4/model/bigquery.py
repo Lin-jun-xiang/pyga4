@@ -29,7 +29,6 @@ class Client:
     Examples
     --------
     ```python
-    # Setup dry_run = True
     Client().query_config.dry_run = True
     ```
     """
@@ -37,14 +36,15 @@ class Client:
         dry_run = False,
         use_query_cache = False
     )
-    def __init__(self, client) -> None:
+    def __init__(self, client, project_id: str) -> None:
         self.client = client
+        self.project_id = project_id
 
 
 class BaseTable(Client):
     """Connect to the data set from bigquery"""
-    def __init__(self, client, dataset_name: str) -> None:
-        super().__init__(client)
+    def __init__(self, client, project_id: str, dataset_name: str) -> None:
+        super().__init__(client, project_id)
         self.dataset_name = dataset_name
         self._table_id = None
 
@@ -78,8 +78,7 @@ class BaseTable(Client):
 
 class Ga4Table(BaseTable):
     def __init__(self, client, project_id: str, dataset_name: str) -> None:
-        super().__init__(client, dataset_name)
-        self.project_id = project_id
+        super().__init__(client, project_id, dataset_name)
         self._query_job = None
 
     def _query_template(self, query_target: str) -> list:
@@ -204,17 +203,17 @@ class Ga4Table(BaseTable):
         """Return all event of page location from data table"""
         query = f"""
             SELECT
-                event_params.value.string_value AS param_string_value
+                param.value.string_value AS param_string_value
             FROM
-                `{self.project_id}.{self.dataset_name}.{self.table_id}`
-                UNNEST(event_params) AS event_params
+                `{self.project_id}.{self.dataset_name}.{self.table_id}`,
+                UNNEST(event_params) AS param
             WHERE
-                event_params.key = "page_location"
+                param.key = "page_location" OR param.key IS NULL
         """
         self._query_job = self.client.query(query, job_config=self.query_config)
         results = self._query_job.result()
 
-        return [row.page_location for row in results]
+        return [row.param_string_value for row in results]
 
     @calculate_bytes_processed
     def query(self, query: str) -> list:
