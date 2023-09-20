@@ -1,0 +1,28 @@
+name: Docs
+on:
+    push:
+        branches: ['main']
+permissions:
+    contents: write
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install sphinx sphinx_rtd_theme
+      - name: Sphinx build
+        run: |
+          cd docs
+          make html
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }} # the default token which no need create
+          publish_dir: docs/build/html # the path of doc
+          force_orphan: true

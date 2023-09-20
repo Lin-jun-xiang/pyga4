@@ -1,10 +1,13 @@
 from collections import Counter
 from typing import Any
 
-from ga4.model.bigquery import Ga4Table
+from pyga4.model.bigquery import Ga4Table
 
 
 class BaseAnalytic:
+    def __init__(self, table: Ga4Table) -> None:
+        self.table = table
+
     @staticmethod
     def attribute_distribution(table: Ga4Table, attribute_name: str) -> Counter:
         attribute_list = getattr(table, attribute_name)
@@ -17,7 +20,13 @@ class UserAnalytic(BaseAnalytic):
     """The features of user"""
 
     def __init__(self, table: Ga4Table) -> None:
-        self.table = table
+        super().__init__(table)
+
+    @property
+    def user_id_distribution(self) -> Counter:
+        return self.attribute_distribution(
+            self.table, 'user_id_list'
+        )
 
     @property
     def countries_distribution(self) -> Counter:
@@ -30,7 +39,7 @@ class DeviceAnalytic(BaseAnalytic):
     """The features of technology"""
 
     def __init__(self, table: Ga4Table) -> None:
-        self.table = table
+        super().__init__(table)
 
     @property
     def os_distribution(self) -> Counter:
@@ -67,7 +76,7 @@ class EventAnalytic(BaseAnalytic):
     """The features of event"""
 
     def __init__(self, table: Ga4Table) -> None:
-        self.table = table
+        super().__init__(table)
 
     @property
     def pages_distribution(self) -> Counter:
