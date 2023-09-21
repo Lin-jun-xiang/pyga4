@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyga4"
-version = "0.1.0"
+version = "0.2.0"
 description = "Python Google Analytics 4 (GA4) Data Extraction and Analysis Toolkit"
 authors = ["Lin-jun-xiang <jimmy871117@gmail.com>"]
 license = "MIT"
