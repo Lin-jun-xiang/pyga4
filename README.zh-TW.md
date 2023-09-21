@@ -32,9 +32,9 @@
 
 接下來，我們會透過免費第三方服務，將資料串流到 Bigquery 中，詳細操作請參考[官方文檔](https://support.google.com/analytics/answer/9823238?hl=en#zippy=%2Cin-this-article)
 
-如果成功串接，你會在 Bigquery 中看到類似以下的資料表(`analytics_xxxx`):
+如果成功串接，你會在 Bigquery 中看到類似以下的資料表(`analytics_xxxx`)，[圖片來源](https://analyticscanvas.com/knowledge-base/ga4-bigquery-export-tutorial-002-querying-event-params/):
 
-![](static/imgs/2023-09-21-14-15-55.png)
+![https://analyticscanvas.com/knowledge-base/ga4-bigquery-export-tutorial-002-querying-event-params/](static/images/2023-09-21-15-04-30.png)
 
 
 ## 功能
