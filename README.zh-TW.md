@@ -1,6 +1,6 @@
 --------------------------------
 <p align="center">
-    <img src='./static/images/pyGA4_logo.PNG' width='60%' />
+    <img src='https://github.com/Lin-jun-xiang/pyga4/blob/main/static/images/pyGA4_logo.PNG?raw=true' width='60%' />
 </p>
 
 [English version](README.md) | [Chinese version README.md](README.zh-TW.md)

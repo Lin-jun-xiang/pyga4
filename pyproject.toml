@@ -13,6 +13,7 @@ matplotlib = "3.6.2"
 pandas = "1.5.3"
 protobuf = "4.24.3"
 pycryptodome = "3.18.0"
+pyga4 = "0.1.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -6,7 +6,7 @@
 pyga4's documentation!
 ======================
 
-.. automodule:: pya4.model.bigquery
+.. automodule:: pyga4.model.bigquery
    :members:
    :undoc-members:
    :show-inheritance:
