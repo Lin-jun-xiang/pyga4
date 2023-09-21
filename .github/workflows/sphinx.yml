@@ -12,9 +12,8 @@ jobs:
       - uses: actions/setup-python@v3
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme poetry
+          pip install sphinx sphinx_rtd_theme
           pip install -e .
-          poetry install
       - name: Sphinx build
         run: |
           cd docs
