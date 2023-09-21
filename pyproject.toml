@@ -5,7 +5,7 @@ description = "Python Google Analytics 4 (GA4) Data Extraction and Analysis Tool
 authors = ["Lin-jun-xiang <jimmy871117@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/Lin-jun-xiang/pyGA4"
+repository = "https://github.com/Lin-jun-xiang/pyga4"
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -13,7 +13,8 @@ matplotlib = "3.6.2"
 pandas = "1.5.3"
 protobuf = "4.24.3"
 pycryptodome = "3.18.0"
-pyga4 = "0.1.0"
+google-cloud = "^0.34.0"
+google-cloud-bigquery = "^3.11.4"
 
 [build-system]
 requires = ["poetry-core"]

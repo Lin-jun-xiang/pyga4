@@ -4,8 +4,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 import os
 import sys
+from pathlib import Path
+
 sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../..//pyga4'))
+sys.path.insert(0, os.path.abspath('../../pyga4'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
