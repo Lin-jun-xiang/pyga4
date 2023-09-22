@@ -13,13 +13,13 @@
 - [How to Stream GA4 Data to Bigquery in Real-time?](#how-to-stream-ga4-data-to-bigquery-in-real-time)
 - [Features](#features)
 - [How to Use?](#how-to-use)
-    - [Download the Package](#download-the-package)
-    - [Connect to Your Bigquery](#connect-to-your-bigquery)
-    - [Connect to GA4 Tables](#connect-to-ga4-tables)
-    - [Evaluate Query Cost with dry run](#evaluate-query-cost-with-dry-run)
-    - [Analyze User Properties](#analyze-user-properties)
-    - [Analyze Device Properties](#analyze-device-properties)
-    - [Analyze Events](#analyze-events)
+  - [Download the Package](#download-the-package)
+  - [Connect to Your Bigquery](#connect-to-your-bigquery)
+  - [Connect to GA4 Tables](#connect-to-ga4-tables)
+  - [Evaluate Query Cost with dry run](#evaluate-query-cost-with-dry-run)
+  - [Analyze User Properties](#analyze-user-properties)
+  - [Analyze Device Properties](#analyze-device-properties)
+  - [Analyze Events](#analyze-events)
 
 ---
 
@@ -52,11 +52,13 @@ If successful, you will see tables in Bigquery similar to the following (`analyt
 
 For more features, please refer to the [package documentation](https://lin-jun-xiang.github.io/pyga4/).
 
-#### Download the Package
+### Download the Package
 
-`pip install pyga4`
+```
+pip install pyga4
+```
 
-#### Connect to Your Bigquery 
+### Connect to Your Bigquery 
 ```python
 from google.cloud import bigquery
 
@@ -67,7 +69,7 @@ client = bigquery.Client()
 # )
 ```
 
-#### Connect to GA4 Tables
+### Connect to GA4 Tables
 ```python
 from pyga4.model import Ga4Table
 
@@ -82,7 +84,7 @@ print(table_id_list)
 ga4_table.table_id = 'events_intraday_20200812'
 ```
 
-#### Evaluate Query Cost with dry run
+### Evaluate Query Cost with dry run
 ```python
     # Query with dry run:
     ga4_table.query_config.dry_run = True
@@ -92,7 +94,7 @@ ga4_table.table_id = 'events_intraday_20200812'
     results = ga4_table.query(query) # return None, but you can see the query usage!
 ```
 
-#### Analyze User Properties
+### Analyze User Properties
 
 **Query User ID and Country List**
 
@@ -113,7 +115,7 @@ countries_dist = user_analytic.countries_distribution
 userid_dist = user_analytic.user_id_distribution
 ```
 
-#### Analyze Device Properties
+### Analyze Device Properties
 
 ```python
 # DeviceAnalytic
@@ -121,7 +123,7 @@ device_analytic = DeviceAnalytic(ga4_table)
 mobile_brand_dist = device_analytic.mobile_brand_distribution
 ```
 
-#### Analyze Events
+### Analyze Events
 
 ```python
 # EventAnalytic

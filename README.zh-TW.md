@@ -11,13 +11,13 @@
 - [如何將 GA4 數據實時串流到 Bigquery?](#如何將-ga4-數據實時串流到-bigquery)
 - [功能](#功能)
 - [如何使用?](#如何使用)
-    - [下載套件](#下載套件)
-    - [連接您的 Bigquery](#連接您的-bigquery)
-    - [連接 GA4 資料表](#連接-ga4-資料表)
-    - [使用 dry run 評估查詢費用](#使用-dry-run-評估查詢費用)
-    - [分析使用者屬性](#分析使用者屬性)
-    - [分析裝置屬性](#分析裝置屬性)
-    - [分析事件](#分析事件)
+  - [下載套件](#下載套件)
+  - [連接您的 Bigquery](#連接您的-bigquery)
+  - [連接 GA4 資料表](#連接-ga4-資料表)
+  - [使用 dry run 評估查詢費用](#使用-dry-run-評估查詢費用)
+  - [分析使用者屬性](#分析使用者屬性)
+  - [分析裝置屬性](#分析裝置屬性)
+  - [分析事件](#分析事件)
 
 ---
 
@@ -51,11 +51,13 @@
 
 更多功能，請參考[套件說明檔](https://lin-jun-xiang.github.io/pyga4/)
 
-#### 下載套件
+### 下載套件
 
-`pip install pyga4`
+```
+pip install pyga4
+```
 
-#### 連接您的 Bigquery 
+### 連接您的 Bigquery 
 ```python
 from google.cloud import bigquery
 
@@ -66,7 +68,7 @@ client = bigquery.Client()
 # )
 ```
 
-#### 連接 GA4 資料表
+### 連接 GA4 資料表
 ```python
 from pyga4.model import Ga4Table
 
@@ -81,7 +83,7 @@ print(table_id_list)
 ga4_table.table_id = 'events_intraday_20200812'
 ```
 
-#### 使用 dry run 評估查詢費用
+### 使用 dry run 評估查詢費用
 
 ```python
     # Query with dry run:
@@ -92,7 +94,7 @@ ga4_table.table_id = 'events_intraday_20200812'
     results = ga4_table.query(query) # return None, but you can see the query usage!
 ```
 
-#### 分析使用者屬性
+### 分析使用者屬性
 
 **查詢使用者id、國家列表**
 
@@ -113,7 +115,7 @@ countries_dist = user_analytic.countries_distribution
 userid_dist = user_analytic.user_id_distribution
 ```
 
-#### 分析裝置屬性
+### 分析裝置屬性
 
 ```python
 # DeviceAnalytic
@@ -121,7 +123,7 @@ device_analytic = DeviceAnalytic(ga4_table)
 mobile_brand_dist = device_analytic.mobile_brand_distribution
 ```
 
-#### 分析事件
+### 分析事件
 
 ```python
 # EventAnalytic
