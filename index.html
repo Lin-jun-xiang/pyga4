@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyga4’s documentation! &mdash; pyga4 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            pyga4
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyga4’s documentation!</a><ul>
+<li><a class="reference internal" href="#pyga4.model.bigquery.BaseTable"><code class="docutils literal notranslate"><span class="pre">BaseTable</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.model.bigquery.BaseTable.all_tables_list"><code class="docutils literal notranslate"><span class="pre">BaseTable.all_tables_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.BaseTable.table_id"><code class="docutils literal notranslate"><span class="pre">BaseTable.table_id</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.BaseTable.to_dataframe"><code class="docutils literal notranslate"><span class="pre">BaseTable.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Client.query_config"><code class="docutils literal notranslate"><span class="pre">Client.query_config</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table"><code class="docutils literal notranslate"><span class="pre">Ga4Table</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_category_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_category_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_language_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_language_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_mobile_brand_name_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_mobile_brand_name_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_mobile_model_name_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_mobile_model_name_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_operating_system_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_operating_system_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.device_web_info_browser_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.device_web_info_browser_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.event_date_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.event_date_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.event_name_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.event_name_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.event_timestamp_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.event_timestamp_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.geo_city_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.geo_city_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.geo_country_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.geo_country_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.geo_metro_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.geo_metro_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.geo_region_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.geo_region_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.geo_sub_continent_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.geo_sub_continent_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.page_location_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.page_location_list</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.query"><code class="docutils literal notranslate"><span class="pre">Ga4Table.query()</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table.user_id_list"><code class="docutils literal notranslate"><span class="pre">Ga4Table.user_id_list</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.model.bigquery.calculate_bytes_processed"><code class="docutils literal notranslate"><span class="pre">calculate_bytes_processed()</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.BaseAnalytic"><code class="docutils literal notranslate"><span class="pre">BaseAnalytic</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.BaseAnalytic.attribute_distribution"><code class="docutils literal notranslate"><span class="pre">BaseAnalytic.attribute_distribution()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic.browser_distribution"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic.browser_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic.category_distribution"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic.category_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic.mobile_brand_distribution"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic.mobile_brand_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic.mobile_model_distribution"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic.mobile_model_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.DeviceAnalytic.os_distribution"><code class="docutils literal notranslate"><span class="pre">DeviceAnalytic.os_distribution</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.EventAnalytic"><code class="docutils literal notranslate"><span class="pre">EventAnalytic</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.EventAnalytic.conversion_rate"><code class="docutils literal notranslate"><span class="pre">EventAnalytic.conversion_rate()</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.EventAnalytic.pages_distribution"><code class="docutils literal notranslate"><span class="pre">EventAnalytic.pages_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.EventAnalytic.track_user_loc"><code class="docutils literal notranslate"><span class="pre">EventAnalytic.track_user_loc()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.UserAnalytic"><code class="docutils literal notranslate"><span class="pre">UserAnalytic</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.UserAnalytic.countries_distribution"><code class="docutils literal notranslate"><span class="pre">UserAnalytic.countries_distribution</span></code></a></li>
+<li><a class="reference internal" href="#pyga4.analytic.analytic.UserAnalytic.user_id_distribution"><code class="docutils literal notranslate"><span class="pre">UserAnalytic.user_id_distribution</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyga4.analytic.data_transform.Transformer"><code class="docutils literal notranslate"><span class="pre">Transformer</span></code></a><ul>
+<li><a class="reference internal" href="#pyga4.analytic.data_transform.Transformer.timestamp_to_datetime"><code class="docutils literal notranslate"><span class="pre">Transformer.timestamp_to_datetime()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pyga4</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyga4’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Lin-jun-xiang/pyga4/blob/main/docs/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyga4.model.bigquery">
+<span id="pyga4-s-documentation"></span><h1>pyga4’s documentation!<a class="headerlink" href="#module-pyga4.model.bigquery" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.BaseTable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.model.bigquery.</span></span><span class="sig-name descname"><span class="pre">BaseTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#BaseTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.BaseTable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyga4.model.bigquery.Client" title="pyga4.model.bigquery.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a></p>
+<p>Connect to the data set from bigquery</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.BaseTable.all_tables_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_tables_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.BaseTable.all_tables_list" title="Link to this definition"></a></dt>
+<dd><p>Return all tables id from data set</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.BaseTable.table_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pyga4.model.bigquery.BaseTable.table_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.BaseTable.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#BaseTable.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.BaseTable.to_dataframe" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Client">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.model.bigquery.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#Client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.Client" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Instance the bigquery client and define its attributes</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>query_config:</dt><dd><p>if <cite>dry_run=True</cite>,
+the query will not response results,
+but return the bytes usage which indicate cost.</p>
+</dd>
+</dl>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">Client().query_config.dry_run</span> <span class="pre">=</span> <span class="pre">True</span>
+<span class="pre">`</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Client.query_config">
+<span class="sig-name descname"><span class="pre">query_config</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;google.cloud.bigquery.job.query.QueryJobConfig</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pyga4.model.bigquery.Client.query_config" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.model.bigquery.</span></span><span class="sig-name descname"><span class="pre">Ga4Table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#Ga4Table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyga4.model.bigquery.BaseTable" title="pyga4.model.bigquery.BaseTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTable</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_category_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_category_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_category_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_category from data table
+ex: mobile, desktop</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_language_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_language_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_language_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_language from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_mobile_brand_name_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_mobile_brand_name_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_mobile_brand_name_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_mobile_brand_name from data table
+ex: Apple</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_mobile_model_name_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_mobile_model_name_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_mobile_model_name_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_mobile_model_name from data table
+ex: iPhone</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_operating_system_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_operating_system_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_operating_system_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_operating_system from data table
+ex: iOS</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.device_web_info_browser_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_web_info_browser_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.device_web_info_browser_list" title="Link to this definition"></a></dt>
+<dd><p>Return all device_web_info_browser from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.event_date_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">event_date_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.event_date_list" title="Link to this definition"></a></dt>
+<dd><p>Return all event_date from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.event_name_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">event_name_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.event_name_list" title="Link to this definition"></a></dt>
+<dd><p>Return all event_name from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.event_timestamp_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">event_timestamp_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.event_timestamp_list" title="Link to this definition"></a></dt>
+<dd><p>Return all event_timestamp from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.geo_city_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geo_city_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.geo_city_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user city from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.geo_country_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geo_country_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.geo_country_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user countries from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.geo_metro_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geo_metro_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.geo_metro_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user metro from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.geo_region_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geo_region_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.geo_region_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user region from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.geo_sub_continent_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geo_sub_continent_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.geo_sub_continent_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user sub_continent from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.page_location_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">page_location_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.page_location_list" title="Link to this definition"></a></dt>
+<dd><p>Return all event of page location from data table</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#Ga4Table.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.query" title="Link to this definition"></a></dt>
+<dd><p>Custom query from data table</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.Ga4Table.user_id_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pyga4.model.bigquery.Ga4Table.user_id_list" title="Link to this definition"></a></dt>
+<dd><p>Return all user_id from data table</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyga4.model.bigquery.calculate_bytes_processed">
+<span class="sig-prename descclassname"><span class="pre">pyga4.model.bigquery.</span></span><span class="sig-name descname"><span class="pre">calculate_bytes_processed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/model/bigquery.html#calculate_bytes_processed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.model.bigquery.calculate_bytes_processed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class" id="module-pyga4.analytic.analytic">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.BaseAnalytic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.analytic.analytic.</span></span><span class="sig-name descname"><span class="pre">BaseAnalytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table" title="pyga4.model.bigquery.Ga4Table"><span class="pre">Ga4Table</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#BaseAnalytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.BaseAnalytic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.BaseAnalytic.attribute_distribution">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attribute_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table" title="pyga4.model.bigquery.Ga4Table"><span class="pre">Ga4Table</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Counter</span></span></span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#BaseAnalytic.attribute_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.BaseAnalytic.attribute_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.analytic.analytic.</span></span><span class="sig-name descname"><span class="pre">DeviceAnalytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table" title="pyga4.model.bigquery.Ga4Table"><span class="pre">Ga4Table</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#DeviceAnalytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyga4.analytic.analytic.BaseAnalytic" title="pyga4.analytic.analytic.BaseAnalytic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAnalytic</span></code></a></p>
+<p>The features of technology</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic.browser_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">browser_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic.browser_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic.category_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">category_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic.category_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic.mobile_brand_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mobile_brand_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic.mobile_brand_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic.mobile_model_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mobile_model_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic.mobile_model_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.DeviceAnalytic.os_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">os_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.DeviceAnalytic.os_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.EventAnalytic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.analytic.analytic.</span></span><span class="sig-name descname"><span class="pre">EventAnalytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table" title="pyga4.model.bigquery.Ga4Table"><span class="pre">Ga4Table</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#EventAnalytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.EventAnalytic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyga4.analytic.analytic.BaseAnalytic" title="pyga4.analytic.analytic.BaseAnalytic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAnalytic</span></code></a></p>
+<p>The features of event</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.EventAnalytic.conversion_rate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conversion_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engagement_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#EventAnalytic.conversion_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.EventAnalytic.conversion_rate" title="Link to this definition"></a></dt>
+<dd><p>Calculate the conversion rate</p>
+<p>If your “target” is to measure how many people <cite>place an order`(purchased), 
+so your `ad clicks</cite> would be the “engagement” because the orders resulting 
+from the ad are your “conversions.”</p>
+<p>If your “target” is to measure how many people <cite>clicking the ad</cite>,
+then your ad clicks would become the “conversions,”
+and <cite>ad impressions</cite> would become the “engagement.”</p>
+<section id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>action_events:</dt><dd><p>The engagement events that users perform.</p>
+</dd>
+<dt>target_events:</dt><dd><p>The target events that represent successful conversions.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>float</dt><dd><p>The calculated conversion rate as a percentage.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h2>Examples<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>If <cite>action_events</cite> contains 1000 page views and <cite>target_events</cite> contains 200 purchases,
+the conversion rate would be calculated as:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conversion_rate</span><span class="p">([</span><span class="o">...</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+<span class="go">20.0</span>
+</pre></div>
+</div>
+<p>If you have multiple engagement events and target events, you can calculate the combined
+conversion rate as well:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conversion_rate</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="go">18.18</span>
+</pre></div>
+</div>
+<p>Note that the input lists should contain counts or frequencies of events.</p>
+</section>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.EventAnalytic.pages_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pages_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.EventAnalytic.pages_distribution" title="Link to this definition"></a></dt>
+<dd><p>Return most common pages for all users</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.EventAnalytic.track_user_loc">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">track_user_loc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#EventAnalytic.track_user_loc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.EventAnalytic.track_user_loc" title="Link to this definition"></a></dt>
+<dd><p>Return most common pages for an user</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.UserAnalytic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.analytic.analytic.</span></span><span class="sig-name descname"><span class="pre">UserAnalytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyga4.model.bigquery.Ga4Table" title="pyga4.model.bigquery.Ga4Table"><span class="pre">Ga4Table</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyga4/analytic/analytic.html#UserAnalytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.analytic.UserAnalytic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyga4.analytic.analytic.BaseAnalytic" title="pyga4.analytic.analytic.BaseAnalytic"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAnalytic</span></code></a></p>
+<p>The features of user</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.UserAnalytic.countries_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">countries_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.UserAnalytic.countries_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyga4.analytic.analytic.UserAnalytic.user_id_distribution">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_distribution</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Counter</span></em><a class="headerlink" href="#pyga4.analytic.analytic.UserAnalytic.user_id_distribution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-pyga4.analytic.data_transform">
+<dt class="sig sig-object py" id="pyga4.analytic.data_transform.Transformer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyga4.analytic.data_transform.</span></span><span class="sig-name descname"><span class="pre">Transformer</span></span><a class="reference internal" href="_modules/pyga4/analytic/data_transform.html#Transformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.data_transform.Transformer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Transform the data of GA4</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyga4.analytic.data_transform.Transformer.timestamp_to_datetime">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp_to_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ga4_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Iterable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></span><a class="reference internal" href="_modules/pyga4/analytic/data_transform.html#Transformer.timestamp_to_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyga4.analytic.data_transform.Transformer.timestamp_to_datetime" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lin-jun-xiang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

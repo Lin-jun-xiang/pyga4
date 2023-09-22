@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyga4.model.bigquery &mdash; pyga4 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            pyga4
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyga4</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyga4.model.bigquery</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyga4.model.bigquery</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+
+
+<div class="viewcode-block" id="calculate_bytes_processed">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.calculate_bytes_processed">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_bytes_processed</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">query_job</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_query_job&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">total_bytes_processed</span> <span class="o">=</span> <span class="n">query_job</span><span class="o">.</span><span class="n">total_bytes_processed</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total bytes processed: </span><span class="si">{</span><span class="n">total_bytes_processed</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="Client">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.Client">[docs]</a>
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instance the bigquery client and define its attributes</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    query_config:</span>
+<span class="sd">        if `dry_run=True`,</span>
+<span class="sd">        the query will not response results,</span>
+<span class="sd">        but return the bytes usage which indicate cost.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ```python</span>
+<span class="sd">    Client().query_config.dry_run = True</span>
+<span class="sd">    ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query_config</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">QueryJobConfig</span><span class="p">(</span>
+        <span class="n">dry_run</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_query_cache</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_id</span> <span class="o">=</span> <span class="n">project_id</span></div>
+
+
+
+<div class="viewcode-block" id="BaseTable">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.BaseTable">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseTable</span><span class="p">(</span><span class="n">Client</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect to the data set from bigquery&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">project_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span> <span class="o">=</span> <span class="n">dataset_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_table_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">table_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_table_id</span>
+
+    <span class="nd">@table_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">table_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_table_id</span> <span class="o">=</span> <span class="n">table_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">all_tables_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all tables id from data set&quot;&quot;&quot;</span>
+        <span class="n">dataset_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="p">)</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">list_tables</span><span class="p">(</span><span class="n">dataset_ref</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">table</span><span class="o">.</span><span class="n">table_id</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">]</span>
+
+<div class="viewcode-block" id="BaseTable.to_dataframe">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.BaseTable.to_dataframe">[docs]</a>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT *</span>
+<span class="s2">            FROM `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_id</span><span class="si">}</span><span class="s2">`</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="n">query_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">query_job</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Ga4Table">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.Ga4Table">[docs]</a>
+<span class="k">class</span> <span class="nc">Ga4Table</span><span class="p">(</span><span class="n">BaseTable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_query_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span><span class="si">{</span><span class="n">query_target</span><span class="si">}</span>
+<span class="s2">            FROM `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_id</span><span class="si">}</span><span class="s2">`</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">job_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query_config</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+        <span class="n">field_name</span> <span class="o">=</span> <span class="n">query_target</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">query_target</span> <span class="k">else</span> <span class="n">query_target</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">user_id_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user_id from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">event_date_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all event_date from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;event_date&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">event_timestamp_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all event_timestamp from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;event_timestamp&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">event_name_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all event_name from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;event_name&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_category_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_category from data table</span>
+<span class="sd">        ex: mobile, desktop</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.category&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_mobile_brand_name_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_mobile_brand_name from data table</span>
+<span class="sd">        ex: Apple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.mobile_brand_name&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_mobile_model_name_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_mobile_model_name from data table</span>
+<span class="sd">        ex: iPhone</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.mobile_model_name&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_operating_system_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_operating_system from data table</span>
+<span class="sd">        ex: iOS</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.operating_system&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_language_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_language from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.language&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_language_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_language from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.language&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">device_web_info_browser_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all device_web_info_browser from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;device.web_info.browser&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">geo_country_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user countries from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;geo.country&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">geo_region_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user region from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;geo.region&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">geo_city_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user city from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;geo.city&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">geo_sub_continent_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user sub_continent from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;geo.sub_continent&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">geo_metro_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all user metro from data table&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_template</span><span class="p">(</span><span class="s1">&#39;geo.metro&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">page_location_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all event of page location from data table&quot;&quot;&quot;</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT</span>
+<span class="s2">                param.value.string_value AS param_string_value</span>
+<span class="s2">            FROM</span>
+<span class="s2">                `</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_id</span><span class="si">}</span><span class="s2">`,</span>
+<span class="s2">                UNNEST(event_params) AS param</span>
+<span class="s2">            WHERE</span>
+<span class="s2">                param.key = &quot;page_location&quot; OR param.key IS NULL</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">job_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query_config</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">param_string_value</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Ga4Table.query">
+<a class="viewcode-back" href="../../../index.html#pyga4.model.bigquery.Ga4Table.query">[docs]</a>
+    <span class="nd">@calculate_bytes_processed</span>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Custom query from data table&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">job_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">query_config</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lin-jun-xiang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

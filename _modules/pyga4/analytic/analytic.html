@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyga4.analytic.analytic &mdash; pyga4 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            pyga4
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyga4</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyga4.analytic.analytic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyga4.analytic.analytic</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">pyga4.model.bigquery</span> <span class="kn">import</span> <span class="n">Ga4Table</span>
+
+
+<div class="viewcode-block" id="BaseAnalytic">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.BaseAnalytic">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseAnalytic</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Ga4Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+
+<div class="viewcode-block" id="BaseAnalytic.attribute_distribution">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.BaseAnalytic.attribute_distribution">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">attribute_distribution</span><span class="p">(</span><span class="n">table</span><span class="p">:</span> <span class="n">Ga4Table</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="n">attribute_list</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">attribute_list</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">counts</span></div>
+</div>
+
+   
+
+<div class="viewcode-block" id="UserAnalytic">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.UserAnalytic">[docs]</a>
+<span class="k">class</span> <span class="nc">UserAnalytic</span><span class="p">(</span><span class="n">BaseAnalytic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The features of user&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Ga4Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">user_id_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;user_id_list&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">countries_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;geo_country_list&#39;</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DeviceAnalytic">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.DeviceAnalytic">[docs]</a>
+<span class="k">class</span> <span class="nc">DeviceAnalytic</span><span class="p">(</span><span class="n">BaseAnalytic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The features of technology&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Ga4Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">os_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;device_operating_system_list&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">category_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;device_category_list&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">browser_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;device_web_info_browser_list&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mobile_brand_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;device_mobile_brand_name_list&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mobile_model_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;device_mobile_model_name_list&#39;</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="EventAnalytic">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.EventAnalytic">[docs]</a>
+<span class="k">class</span> <span class="nc">EventAnalytic</span><span class="p">(</span><span class="n">BaseAnalytic</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The features of event&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Ga4Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pages_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return most common pages for all users&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute_distribution</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;page_location_list&#39;</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="EventAnalytic.track_user_loc">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.EventAnalytic.track_user_loc">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">track_user_loc</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return most common pages for an user&quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="EventAnalytic.conversion_rate">
+<a class="viewcode-back" href="../../../index.html#pyga4.analytic.analytic.EventAnalytic.conversion_rate">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">conversion_rate</span><span class="p">(</span><span class="n">engagement_events</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">target_events</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the conversion rate</span>
+
+<span class="sd">        If your &quot;target&quot; is to measure how many people `place an order`(purchased), </span>
+<span class="sd">        so your `ad clicks` would be the &quot;engagement&quot; because the orders resulting </span>
+<span class="sd">        from the ad are your &quot;conversions.&quot;</span>
+
+<span class="sd">        If your &quot;target&quot; is to measure how many people `clicking the ad`,</span>
+<span class="sd">        then your ad clicks would become the &quot;conversions,&quot;</span>
+<span class="sd">        and `ad impressions` would become the &quot;engagement.&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        action_events:</span>
+<span class="sd">            The engagement events that users perform.</span>
+
+<span class="sd">        target_events:</span>
+<span class="sd">            The target events that represent successful conversions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The calculated conversion rate as a percentage.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        If `action_events` contains 1000 page views and `target_events` contains 200 purchases,</span>
+<span class="sd">        the conversion rate would be calculated as:</span>
+
+<span class="sd">        &gt;&gt;&gt; conversion_rate([...,1000], [...,200])</span>
+<span class="sd">        20.0</span>
+
+<span class="sd">        If you have multiple engagement events and target events, you can calculate the combined</span>
+<span class="sd">        conversion rate as well:</span>
+
+<span class="sd">        &gt;&gt;&gt; conversion_rate([1000, 500], [200, 100])</span>
+<span class="sd">        18.18</span>
+
+<span class="sd">        Note that the input lists should contain counts or frequencies of events.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_events</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">engagement_events</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lin-jun-xiang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
